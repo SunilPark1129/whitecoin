@@ -83,7 +83,7 @@ function App() {
     if (hasStarted) {
       timer = setTimeout(() => {
         setHasStarted(false);
-      }, (stage / 5) * 1000);
+      }, (stage / 10) * 1000);
     }
   }, [hasStarted]);
 
@@ -147,7 +147,7 @@ function App() {
                   hasStarted && active && "box-container--active"
                 } ${!active && "box-container--inactive"}`}
                 style={
-                  hasStarted ? { animation: `roll ${stage / 5}s linear` } : {}
+                  hasStarted ? { animation: `roll ${stage / 10}s linear` } : {}
                 }
               >
                 {boxs.map(({ empty, spot }, idx) =>
