@@ -244,6 +244,7 @@ function App() {
             >
               OK
             </button>
+            <div>Developed by Sunil Park</div>
           </div>
         </div>
       )}
