@@ -1,38 +1,250 @@
-.App {
-  text-align: center;
+:root {
+  --max-box: 1;
+  --clr-bg: rgb(71, 79, 90);
+  /* --clr-bg: rgb(43, 50, 64); */
+  /* --clr-bg: rgb(127, 105, 138); */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+body {
+  background-color: var(--clr-bg);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  padding: 1em;
+}
+
+.top-container {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(6, minmax(80px, 1fr));
+  max-width: 1000px;
+  width: 100%;
+}
+
+.box {
+  display: flex;
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background-color: rgb(40, 40, 40);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.box--inactive {
+  background-color: var(--clr-bg);
+  cursor: default;
+}
+
+.box-container {
+  display: flex;
+  flex-direction: column-reverse;
+  width: 100%;
+  height: 100%;
+  transform: translateY(-100%);
+  position: absolute;
+}
+
+.box-container--active {
+}
+
+.box-container--inactive {
+  opacity: 0;
+}
+
+@keyframes roll {
+  100% {
+    transform: translateY(var(--max-box));
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.box__item {
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  padding: 0.5em;
+}
+
+.box__item div {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.box__item--j div {
+  border: 1px solid rgb(120, 120, 120);
+  background-color: rgb(248, 248, 248);
+}
+.box__item--o div {
+  border: 1px solid rgb(120, 120, 120);
+  background-color: rgb(235, 235, 134);
+}
+.box__item--x div {
+}
+
+.game-button {
+  padding: 0.5em 2em;
+  max-width: max-content;
+  border-radius: 4px;
+  border: 2px solid #fff;
+  color: #fff;
+  font-weight: bold;
+}
+
+.game-button:disabled {
+  opacity: 0.3;
+  cursor: default;
+  background-color: transparent !important;
+}
+
+.game-button:hover {
+  background-color: #6b5c5c;
+}
+
+.bot-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 1em;
 }
 
-.App-link {
-  color: #61dafb;
+.round {
+  position: relative;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.round-animation {
+  position: absolute;
+  font-size: 2em;
+  font-weight: bold;
+  transform: scale(1.5) translateY(-2.5px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.round-animation--active {
+  animation: roundAnimation 0.3s;
+}
+
+@keyframes roundAnimation {
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+.modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal .bg {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.52);
+  width: 100%;
+  height: 100%;
+}
+
+.modal__container {
+  background-color: #b9e69d;
+  position: relative;
+  max-width: 20rem;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.modal__container__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.modal__container__text div,
+.modal__container__text span {
+  font-weight: bold;
+}
+
+.modal__container button {
+  border: 1px solid rgb(146, 146, 146);
+  background-color: #e9e9e9;
+  padding: 0.25rem 2rem;
+  width: max-content;
+}
+
+.modal__container button:hover {
+  background-color: #ffffff;
+}
+
+@media (max-width: 600px) {
+  .top-container {
+    gap: 0.8rem;
+    grid-template-columns: repeat(6, minmax(50px, 1fr));
+  }
+}
+
+@media (max-width: 400px) {
+  .top-container {
+    gap: 0.7rem;
+    grid-template-columns: repeat(4, minmax(60px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 400px) {
+  body {
+    font-size: 0.8rem;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em;
   }
 }
